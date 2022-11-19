@@ -9,22 +9,19 @@ jobs:
     steps:
       - name: Checkout Latest Repo
         uses: actions/checkout@master
-        
-      - name: Generate Deployment Package 
-        run: zip -r deploy.zip * -x "**node_modules**"
-        
-      - name: Get timestamp
-        uses: gerred/actions/current-time@master
-        id: current-time
-        
-      - name: Run string replace
-        uses: frabert/replace-string-action@master
-        id: format-time
+      - name: Docker Login
+        uses: docker/login-action@v1.8.0
         with:
-          pattern: '[:\.]+'
-          string: "${{ steps.current-time.outputs.time }}"
-          replace-with: '-'
-          flags: 'g'
+         username: ${{secrets.DOCKERHUB_USERNAME}}
+         password: ${{secrets.DOCKERHUB_TOKEN}}
+         logout: true
+      - name: Build Server image
+        run: docker build -t alisleem811/bluepages-server .
+      - name: Tag our Image
+        run: docker tag alisleem811/bluepages-server 
+          alisleem811/bluepages-server:latest
+      - name: Push to dockerhub
+        run: docker push alisleem811/bluepages-server
           
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v14
@@ -33,6 +30,6 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: blue-pages-docker
           environment_name: Bluepagesdocker-env
-          version_label: "blue-pages-docker-deployment-${{ steps.format-time.outputs.replaced }}"
+          version_label: "blue-pages-docker-deployment-19-11_22:07"
           region: us-east-1
-          deployment_package: deploy.zip
+

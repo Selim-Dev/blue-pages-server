@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+    dev:
+        container_name: nestjs_api_dev
+        image: nestjs-api-dev:1.0.0
+        build:
+            context: .
+            target: development
+            dockerfile: ./development.Dockerfile
+        # depends_on:
+        #     - postgres
+        environment:
+            DATABASE_URL: postgres://cafclowq:CH2rNYUvTJnUnrVVjbXxqTifUd2G1xcf@tyke.db.elephantsql.com/cafclowq
+            NODE_ENV: development
+            PORT: 3000
+            JWT_SECRET: jwtsecrit
+            CLD_CLOUD_NAME: mohamed-aboelezz
+            CLD_API_KEY: 376261214791977
+            CLD_API_SECRET: fMB460BKQ66uq9XoYEowDtYjMzY
+            AWS_S3_BUCKET_NAME: "blue-page-photo"
+            SECRET_ACCESS_KEY: "a+T/8G0nVt8GbsKsxJxWE6y3LdZKLQHc5iNZaGVz"
+            ID_ACCESS_KEY: "AKIA24SC7QAS7EMTUJXL"
+        command: npm run start:debug
+        ports:
+            - 5000:3000
+            - 9229:9229
+        networks:
+            - nesjs-network
+        volumes:
+            - .:/usr/src/app
+            - /usr/src/app/node_modules
+            - /usr/src/app/dist
+        restart: always
+    # prod:
+    #     container_name: nestjs_api_prod
+    #     image: nestjs-api-prod:1.0.0
+    #     build:
+    #         context: .
+    #         target: development
+    #         dockerfile: ./Dockerfile
+    #     command: npm run start:prod
+    #     environment:
+    #         DATABASE_URL: postgres://cafclowq:CH2rNYUvTJnUnrVVjbXxqTifUd2G1xcf@tyke.db.elephantsql.com/cafclowq
+    #         NODE_ENV: production
+    #         PORT: 80
+    #         JWT_SECRET: jwtsecrit
+    #         CLD_CLOUD_NAME: mohamed-aboelezz
+    #         CLD_API_KEY: 376261214791977
+    #         CLD_API_SECRET: fMB460BKQ66uq9XoYEowDtYjMzY
+    #         AWS_S3_BUCKET_NAME: "blue-page-photo"
+    #         SECRET_ACCESS_KEY: "a+T/8G0nVt8GbsKsxJxWE6y3LdZKLQHc5iNZaGVz"
+    #         ID_ACCESS_KEY: "AKIA24SC7QAS7EMTUJXL"
+    #     ports:
+    #         - 5000:80
+    #         - 9229:9229
+    #     networks:
+    #         - nesjs-network
+    #     volumes:
+    #         - .:/usr/src/app
+    #         - /usr/src/app/node_modules
+    #     restart: always
+    # postgres:
+    #     image: postgres:10.4
+    #     ports:
+    #         - "35000:5432"
+    #     environment: 
+    #         POSTGRES_USER: user
+    #         POSTGRES_PASSWORD: password
+    #         POSTGRES_DB: db
+        
+# networks:
+#     nesjs-network:
+
+
+
+# version: "3.8"
+# services:
+#     api:
+#         # image: thomas-oliver/nestjs-dockerized 
+#         build:
+#             dockerfile: Dockerfile
+#             context: .
+#         depends_on: 
+#             - postgres
+#         environment: 
+#             DATABASE_URL: postgres://user:password@postgres:5432/db
+#             NODE_ENV: development
+#             PORT: 3000
+#         ports:
+#             - "8080:3000"
+
+#     postgres:
+#         image: postgres:10.4
+#         ports:
+#             - "35000:5432"
+#         environment: 
+#             POSTGRES_USER: user
+#             POSTGRES_PASSWORD: password
+#             POSTGRES_DB: db

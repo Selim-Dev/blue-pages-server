@@ -1,0 +1,12 @@
+sudo: required
+services:
+  - docker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "blue-pages-docker"
+  env: "Bluepagesdocker-env"
+  bucket_name: "elasticbeanstalk-us-east-1-748538527781"
+  bucket_path: "blue-pages-docker"
+

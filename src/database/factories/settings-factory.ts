@@ -1,0 +1,28 @@
+import { Setting } from './../../settings/setting.entity';
+import { randEmail, randFullName, randPassword } from '@ngneat/falso';
+import { define } from 'typeorm-seeding';
+define(Setting, () => {
+	const setting = new Setting();
+		setting.title_en = 'Blue Pages';
+		setting.title_ar = 'الصفحات الزرقاء';
+		setting.description_en = 'Biggest Directory For Companies';
+		setting.description_ar = 'أكبر مكان لزياده أعمالك';
+		setting.keywords = 'directory; business';
+		setting.facebook = 'http=//facebook.com';
+		setting.twitter = 'http=//twitter.com';
+		setting.instagram = 'http=//instagram.com';
+		setting.linkedin = 'http=//linkedin.com';
+		setting.snapchat = 'http=//snapchat.com';
+		setting.youtube = 'http=//youtube.com';
+		setting.phone = '9600000000';
+		setting.email = 'bluepages@gmail.com';
+		setting.whatsapp = '9600000000';
+		setting.address_en = 'Mekka';
+		setting.address_ar = 'مكه';
+		setting.copyright_en = '© directory 2022, All Rights Reserved';
+		setting.copyright_ar = '©directory 2022, جميع الحقوق محفوظةsetting.';
+		setting.location = 'Mekka';
+		setting.logo_ar = 'https://images.pexels.com/photos/2129796/pexels-photo-2129796.png?auto=compress&cs=tinysrgb&w=600';
+		setting.logo_en = 'https://images.pexels.com/photos/2129796/pexels-photo-2129796.png?auto=compress&cs=tinysrgb&w=600';
+  return setting;
+});
